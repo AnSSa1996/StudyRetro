@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour {
+public class BulletSpawner : MonoBehaviour
+{
     public GameObject bulletPrefab;
     public float spawnRateMin = 0.5f;
     public float spawnRateMax = 3.0f;
@@ -10,22 +11,25 @@ public class BulletSpawner : MonoBehaviour {
     private Transform target;
     private float spawnRate = 3.0f;
     private float timeAfterSpawn;
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
         timeAfterSpawn = 0f;
         spawnRate = Random.Range(spawnRateMax, spawnRateMax);
         target = FindObjectOfType<PlayerController>().transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         timeAfterSpawn += Time.deltaTime;
-        if(timeAfterSpawn >= spawnRate)
+        if (timeAfterSpawn >= spawnRate)
         {
             timeAfterSpawn = 0f;
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             bullet.transform.LookAt(target);
             spawnRate = Random.Range(spawnRateMax, spawnRateMax);
         }
-	}
+    }
 }
